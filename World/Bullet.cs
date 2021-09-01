@@ -34,28 +34,25 @@ namespace HerexamenGame
                 if (hero.inputReader.LastKey().IsKeyUp(Keys.Left))
                 {
                     bullet.position += bullet.velocity;
-
                 }
                 else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right))
                 {
                     bullet.position -= bullet.velocity;
-
                 }
-
                     if (Vector2.Distance(bullet.position, hero.Position) > 800)
-                {
-                    bullet.isVisible = false;
-                }
-            }
-            
-            for (int i = 0; i < bullets.Count; i++)
-			    {
-                    if (!bullets[i].isVisible)
                     {
-                        bullets.RemoveAt(i);
-                        i--;
+                        bullet.isVisible = false;
                     }
                 }
+            
+            for (int i = 0; i < bullets.Count; i++)
+			{
+                if (!bullets[i].isVisible)
+                {
+                    bullets.RemoveAt(i);
+                    i--;
+                }
+            }
         }
         
         public void Shoot(Hero hero)
@@ -69,14 +66,11 @@ namespace HerexamenGame
             {
                bullets.Add(newBullet);
             }
-
         }
 
         public void Draw(SpriteBatch sprite)
-        {
-            
-                sprite.Draw(texture, position, bulletSize, Color.White, 0f, origin, 0.1f, SpriteEffects.None, 0 );
-            
+        {            
+            sprite.Draw(texture, position, bulletSize, Color.White, 0f, origin, 0.1f, SpriteEffects.None, 0 );            
         }
 
     }

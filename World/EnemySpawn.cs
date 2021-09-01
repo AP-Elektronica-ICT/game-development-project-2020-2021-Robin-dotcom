@@ -12,7 +12,6 @@ namespace HerexamenGame.World
     {
         
         public Vector2 position;
-        private double timeSeconds;
         public Random random = new Random();
 
 
@@ -28,13 +27,10 @@ namespace HerexamenGame.World
         public void LoadEnemies(GameTime gameTime)
         {
 
-            if (gameTime.TotalGameTime.TotalSeconds%1 < 0.01)
-          
+            if (gameTime.TotalGameTime.TotalSeconds%1 < 0.01)          
             {
-                enemyToLoad.Create();
-                timeSeconds++;
-            }
-            
+                enemyToLoad.Create();                
+            }            
         }
 
         public void Update(GameTime gameTime)

@@ -58,9 +58,7 @@ namespace HerexamenGame
 
             Bullet.Update(this);
 
-
             var direction = inputReader.ReadInput();
-
             MoveHorizontal(direction);
 
             if (Position.X <= 0)
