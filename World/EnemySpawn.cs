@@ -1,6 +1,7 @@
 ﻿using HerexamenGame.Content.Animation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +12,11 @@ namespace HerexamenGame.World
     {
         
         public Vector2 position;
-        private double timeSeconds=-1;
-       
+        private double timeSeconds;
+        Random random = new Random();
 
         //public List<Enemy> enemies = new List<Enemy>();
-        Enemy enemyToLoad;
+        private Enemy enemyToLoad;
 
         public EnemySpawn(Enemy enemy)
         {
@@ -25,10 +26,11 @@ namespace HerexamenGame.World
         }
         public void LoadEnemies(GameTime gameTime)
         {
-            
-            if ((float)gameTime.ElapsedGameTime.TotalSeconds == timeSeconds +1)
+
+            if (gameTime.TotalGameTime.TotalSeconds%1 < 0.01)
+          
             {
-                enemyToLoad.Create(enemyToLoad);
+                enemyToLoad.Create();
                 timeSeconds++;
             }
             
@@ -36,8 +38,12 @@ namespace HerexamenGame.World
 
         public void Update(GameTime gameTime)
         {
-            LoadEnemies(gameTime);
+            if (random.Next(0,1) < 0.1)
+            {
+                LoadEnemies(gameTime);
+            }
             enemyToLoad.Update(gameTime);
+
             
         }
 

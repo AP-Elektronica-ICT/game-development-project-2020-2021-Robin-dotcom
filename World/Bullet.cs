@@ -67,7 +67,7 @@ namespace HerexamenGame
 
             if (bullets.Count() < 20)
             {
-                bullets.Add(newBullet);
+               bullets.Add(newBullet);
             }
 
         }

@@ -16,14 +16,14 @@ namespace HerexamenGame.World
 
         public List<Enemy> enemies = new List<Enemy>();
 
-        //bool isVisible;
+        private bool isVisible;
 
         public Enemy(Texture2D newTexture)
         {
             texture = newTexture;
             position = new Vector2(0, 375);
             velocity = new Vector2(2,0);
-            //isVisible = false;
+            isVisible = false;
 
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(12, 254, 53, 88)));
@@ -43,12 +43,25 @@ namespace HerexamenGame.World
             {
                 enemy.position += enemy.velocity;
                 enemy.animation.Update(gameTime);
+
+            }
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (!enemies[i].isVisible)
+                {
+                    enemies.RemoveAt(i);
+                    i--;
+                }
             }
         }
 
-        public void Create(Enemy enemy)
+        public void Create()
         {
-            Enemy newEnemy = new Enemy(enemy.texture);
+            Enemy newEnemy = new Enemy(texture);
+            //newEnemy.position = new Vector2(spawn.position.X, spawn.position.Y);
+            newEnemy.position = new Vector2(0, 375); 
+            newEnemy.velocity = new Vector2(2, 0);
+            newEnemy.isVisible = true;
             enemies.Add(newEnemy);
         }
 

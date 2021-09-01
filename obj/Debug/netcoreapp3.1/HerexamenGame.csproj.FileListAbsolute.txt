@@ -62,7 +62,6 @@ D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\b
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
-D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.csprojAssemblyReference.cache
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.AssemblyInfoInputs.cache
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.AssemblyInfo.cs
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.csproj.CoreCompileInputs.cache
@@ -70,3 +69,4 @@ D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\o
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.dll
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.pdb
 D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.genruntimeconfig.cache
+D:\AP\Semester3\GameDev\github\game-development-project-2020-2021-Robin-dotcom\obj\Debug\netcoreapp3.1\HerexamenGame.csprojAssemblyReference.cache

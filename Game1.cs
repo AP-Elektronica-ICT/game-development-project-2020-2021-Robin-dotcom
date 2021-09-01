@@ -77,7 +77,6 @@ namespace HerexamenGame
             bullet = new Bullet(textureBullet);
             hero = new Hero(textureSoldier1, new KeyBoardReader(), screenWidth, bullet);
             enemy = new Enemy(textureZombie1);
-
             spawn = new EnemySpawn(enemy);
             //startUpMenu = new StartUpMenu(textureButton, new Vector2((GraphicsDevice.Viewport.Width / 2) - 50, 200));
         }
