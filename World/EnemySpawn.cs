@@ -13,7 +13,8 @@ namespace HerexamenGame.World
         
         public Vector2 position;
         private double timeSeconds;
-        Random random = new Random();
+        public Random random = new Random();
+
 
         //public List<Enemy> enemies = new List<Enemy>();
         private Enemy enemyToLoad;
@@ -38,21 +39,14 @@ namespace HerexamenGame.World
 
         public void Update(GameTime gameTime)
         {
-            if (random.Next(0,1) < 0.1)
+            int r = random.Next(100);
+            if (r <= 10)
             {
                 LoadEnemies(gameTime);
             }
-            enemyToLoad.Update(gameTime);
-
-            
+            enemyToLoad.Update(gameTime);            
         }
 
-        //public void Draw(SpriteBatch spriteBatch)
-        //{
-        //    foreach (Enemy enemy in enemies)
-        //    {
-        //        enemy.Draw(spriteBatch);
-        //    }
-        //}
+        
     }
 }
