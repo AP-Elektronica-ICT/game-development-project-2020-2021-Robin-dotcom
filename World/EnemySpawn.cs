@@ -11,10 +11,10 @@ namespace HerexamenGame.World
     {
         
         public Vector2 position;
-        private double timeSeconds;
+        private double timeSeconds=-1;
        
 
-        public List<Enemy> enemies = new List<Enemy>();
+        //public List<Enemy> enemies = new List<Enemy>();
         Enemy enemyToLoad;
 
         public EnemySpawn(Enemy enemy)
@@ -26,9 +26,9 @@ namespace HerexamenGame.World
         public void LoadEnemies(GameTime gameTime)
         {
             
-            if (gameTime.ElapsedGameTime.TotalSeconds > timeSeconds)
+            if ((float)gameTime.ElapsedGameTime.TotalSeconds == timeSeconds +1)
             {
-                enemies.Add(new Enemy(enemyToLoad.texture));
+                enemyToLoad.Create(enemyToLoad);
                 timeSeconds++;
             }
             
@@ -37,10 +37,8 @@ namespace HerexamenGame.World
         public void Update(GameTime gameTime)
         {
             LoadEnemies(gameTime);
-            foreach (Enemy enemy in enemies)
-            {
-                enemy.Update(gameTime);
-            }
+            enemyToLoad.Update(gameTime);
+            
         }
 
         //public void Draw(SpriteBatch spriteBatch)

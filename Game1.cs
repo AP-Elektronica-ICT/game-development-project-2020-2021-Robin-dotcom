@@ -108,7 +108,7 @@ namespace HerexamenGame
             {
                 bullet.Draw(_spriteBatch);
             }
-            foreach (Enemy enemy in spawn.enemies)
+            foreach (Enemy enemy in enemy.enemies)
             {
                 enemy.Draw(_spriteBatch);
             }

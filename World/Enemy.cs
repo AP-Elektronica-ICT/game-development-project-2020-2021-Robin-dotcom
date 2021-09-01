@@ -13,15 +13,18 @@ namespace HerexamenGame.World
         public Vector2 position;
         public Vector2 velocity;
         public Animation animation;
-        
 
+        public List<Enemy> enemies = new List<Enemy>();
 
+        //bool isVisible;
 
         public Enemy(Texture2D newTexture)
         {
             texture = newTexture;
-            position = new Vector2(0, 370);
-            velocity = new Vector2(5,5);;
+            position = new Vector2(0, 375);
+            velocity = new Vector2(2,0);
+            //isVisible = false;
+
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(12, 254, 53, 88)));
             animation.AddFrame(new AnimationFrame(new Rectangle(88, 254, 53, 88)));
@@ -36,8 +39,17 @@ namespace HerexamenGame.World
 
         public void Update(GameTime gameTime)
         {
-            position *= velocity;
-            animation.Update(gameTime);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.position += enemy.velocity;
+                enemy.animation.Update(gameTime);
+            }
+        }
+
+        public void Create(Enemy enemy)
+        {
+            Enemy newEnemy = new Enemy(enemy.texture);
+            enemies.Add(newEnemy);
         }
 
         public void Draw(SpriteBatch sprite)

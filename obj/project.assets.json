@@ -7288,11 +7288,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AP\\Semester3\\GameDev\\HerexamenGame\\HerexamenGame.csproj",
+      "projectUniqueName": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj",
       "projectName": "HerexamenGame",
-      "projectPath": "D:\\AP\\Semester3\\GameDev\\HerexamenGame\\HerexamenGame.csproj",
+      "projectPath": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj",
       "packagesPath": "C:\\Users\\Robin Segers\\.nuget\\packages\\",
-      "outputPath": "D:\\AP\\Semester3\\GameDev\\HerexamenGame\\obj\\",
+      "outputPath": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

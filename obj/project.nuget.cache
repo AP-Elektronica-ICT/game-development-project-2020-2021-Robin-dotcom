@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w0MQUlK+C8s/jNYDNPIKgjFST2Lw3UdQk2StMhMArlWSQ4IgTWYRJpCnDq8nLquDs4zkOfItIIyyI/TDaMV4hA==",
+  "dgSpecHash": "dfdFfhENteK1oxc96BFwCPLS79ViFIslsOvtlNup9FKCVWUOTm4M8Lli5MKTpDLF7cEFqmXkXNKXRvL7Ejlyww==",
   "success": true,
-  "projectFilePath": "D:\\AP\\Semester3\\GameDev\\HerexamenGame\\HerexamenGame.csproj",
+  "projectFilePath": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Robin Segers\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
