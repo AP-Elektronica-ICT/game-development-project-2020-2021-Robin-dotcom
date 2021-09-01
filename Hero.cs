@@ -53,11 +53,10 @@ namespace HerexamenGame
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                Bullet.Shoot(this);
-                Bullet.Update(this);
-
+                Bullet.Shoot(this);                
             }
 
+            Bullet.Update(this);
 
 
             var direction = inputReader.ReadInput();
