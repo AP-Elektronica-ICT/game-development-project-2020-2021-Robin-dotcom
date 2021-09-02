@@ -1,9 +1,11 @@
-﻿using HerexamenGame.Input;
+﻿using HerexamenGame.Collision;
+using HerexamenGame.Input;
 using HerexamenGame.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace HerexamenGame
 {
@@ -32,6 +34,7 @@ namespace HerexamenGame
         Bullet bullet;
         Enemy enemy;
         EnemySpawn spawn;
+        CollisionManager collisionManager;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,7 +46,7 @@ namespace HerexamenGame
         {
             // TODO: Add your initialization logic here
 
-       
+            collisionManager = new CollisionManager();
 
             base.Initialize();
         }
@@ -91,6 +94,14 @@ namespace HerexamenGame
             
             hero.Update(gameTime);
             spawn.Update(gameTime);
+            foreach (Enemy enemy in enemy.enemies)
+            {
+                if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
+                {
+                    Debug.WriteLine("aaa");
+                }
+            }
+            
 
             base.Update(gameTime);
         }

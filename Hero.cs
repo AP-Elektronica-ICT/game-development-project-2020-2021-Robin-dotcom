@@ -13,6 +13,9 @@ namespace HerexamenGame
     public class Hero : ITransform
     {
         public Vector2 Position { get; set; }
+        public Rectangle CollisionRectangle { get; set; }
+        private Rectangle _collisionRectangle;
+
         private Texture2D heroTexture;
         public Animation animation;
         private int screenWidth;
@@ -28,6 +31,7 @@ namespace HerexamenGame
         {
             heroTexture = texture;
             Position = new Vector2(spawnX, spawnY);
+
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(18, 483, 79, 96)));
             animation.AddFrame(new AnimationFrame(new Rectangle(128, 483, 79, 96)));
@@ -43,6 +47,7 @@ namespace HerexamenGame
             animation.AddFrame(new AnimationFrame(new Rectangle(1213, 483, 79, 96)));
 
             inputReader = reader;
+            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 80, 97);
             moveCommand = new MoveCommand();
             idleFrame = new Rectangle(22, 123, 73, 101);
             screenWidth = width;
@@ -60,6 +65,9 @@ namespace HerexamenGame
 
             var direction = inputReader.ReadInput();
             MoveHorizontal(direction);
+            _collisionRectangle.X = (int)Position.X;
+            CollisionRectangle = _collisionRectangle;
+
 
             if (Position.X <= 0)
             {

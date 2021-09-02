@@ -21,7 +21,6 @@ namespace HerexamenGame.Commands
             {
                 direction *= speed;
                 transform.Position += direction;
-
             }
             
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HerexamenGame.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -8,23 +9,29 @@ using System.Text;
 
 namespace HerexamenGame
 {
-    public class Bullet
+    public class Bullet : ITransform
     {
          Texture2D texture;
 
-        public Vector2 position;
+        
         public Vector2 velocity;
         public Vector2 origin;
         public List<Bullet> bullets = new List<Bullet>();
         private Rectangle bulletSize;
 
+
         bool isVisible;
+
+        public Vector2 Position { get; set; }
+        public Rectangle CollisionRectangle { get; set; }
+        private Rectangle _collisionRectangle;
 
         public Bullet(Texture2D newTexture)
         {
             texture = newTexture;
             isVisible = false;
             bulletSize = new Rectangle(65, 156, 273, 91);
+            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 273, 91);
         }
 
         public void Update(Hero hero)
@@ -33,18 +40,23 @@ namespace HerexamenGame
             {
                 if (hero.inputReader.LastKey().IsKeyUp(Keys.Left))
                 {
-                    bullet.position += bullet.velocity;
+                    bullet.Position += bullet.velocity;
+
                 }
                 else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right))
                 {
-                    bullet.position -= bullet.velocity;
+                    bullet.Position -= bullet.velocity;
                 }
-                    if (Vector2.Distance(bullet.position, hero.Position) > 800)
+                    if (Vector2.Distance(bullet.Position, hero.Position) > 800)
                     {
                         bullet.isVisible = false;
                     }
-                }
-            
+                bullet._collisionRectangle.X = (int)Position.X;
+                bullet.CollisionRectangle = bullet._collisionRectangle;
+
+            }
+
+
             for (int i = 0; i < bullets.Count; i++)
 			{
                 if (!bullets[i].isVisible)
@@ -59,7 +71,7 @@ namespace HerexamenGame
         {
             Bullet newBullet = new Bullet(texture);
             newBullet.velocity = new Vector2(20,0);
-            newBullet.position = new Vector2(hero.Position.X, hero.Position.Y+(hero.animation.CurrentFrame.SourceRectangle.Height-30));
+            newBullet.Position = new Vector2(hero.Position.X, hero.Position.Y+(hero.animation.CurrentFrame.SourceRectangle.Height-30));
             newBullet.isVisible = true;
 
             if (bullets.Count() < 20)
@@ -70,7 +82,7 @@ namespace HerexamenGame
 
         public void Draw(SpriteBatch sprite)
         {            
-            sprite.Draw(texture, position, bulletSize, Color.White, 0f, origin, 0.1f, SpriteEffects.None, 0 );            
+            sprite.Draw(texture, Position, bulletSize, Color.White, 0f, origin, 0.1f, SpriteEffects.None, 0 );            
         }
 
     }
