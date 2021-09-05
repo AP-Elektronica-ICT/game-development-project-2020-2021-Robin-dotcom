@@ -24,6 +24,8 @@ namespace HerexamenGame
 
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
+        public int Health { get; set; }
+
         private Rectangle _collisionRectangle;
 
         public Bullet(Texture2D newTexture)

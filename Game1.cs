@@ -23,6 +23,7 @@ namespace HerexamenGame
         public Texture2D textureSoldier5;
         public Texture2D textureBullet;
         public Texture2D textureZombie1;
+        public Texture2D textureHealthBar;
 
         //Viewport
         public int screenWidth;
@@ -35,6 +36,7 @@ namespace HerexamenGame
         Enemy enemy;
         EnemySpawn spawn;
         CollisionManager collisionManager;
+        HealthBar healthBar;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -56,14 +58,15 @@ namespace HerexamenGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            textureBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/forestbackground");
-            textureSoldier1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/soldier1");
-            textureSoldier2 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/soldier2");
-            textureSoldier3 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/soldier3");
-            textureSoldier4 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/soldier4");
-            textureSoldier5 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/soldier5");
+            textureBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/forestbackground");
+            textureSoldier1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier1");
+            textureSoldier2 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier2");
+            textureSoldier3 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier3");
+            textureSoldier4 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier4");
+            textureSoldier5 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier5");
             textureBullet = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/bullet");
-            textureZombie1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/zombie1");
+            textureZombie1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/zombie1");
+            textureHealthBar = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/healthBar2");
 
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
@@ -81,6 +84,7 @@ namespace HerexamenGame
             hero = new Hero(textureSoldier1, new KeyBoardReader(), screenWidth, bullet);
             enemy = new Enemy(textureZombie1);
             spawn = new EnemySpawn(enemy);
+            healthBar = new HealthBar(textureHealthBar);
             //startUpMenu = new StartUpMenu(textureButton, new Vector2((GraphicsDevice.Viewport.Width / 2) - 50, 200));
         }
 
@@ -98,9 +102,11 @@ namespace HerexamenGame
             {
                 if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
                 {
-                    Debug.WriteLine("aaa");
+                    hero.Health -= 5;
                 }
             }
+
+            healthBar.Update(hero);
             
 
             base.Update(gameTime);
@@ -123,6 +129,7 @@ namespace HerexamenGame
                 enemy.Draw(_spriteBatch);
             }
             hero.Draw(_spriteBatch);
+            healthBar.Draw(_spriteBatch);
             
             _spriteBatch.End();
 

@@ -9,5 +9,6 @@ namespace HerexamenGame.Interfaces
     {
         Vector2 Position { get; set; }
         Rectangle CollisionRectangle { get; set; }
+        public int Health { get; set; }
     }
 }

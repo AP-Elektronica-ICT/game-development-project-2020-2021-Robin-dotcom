@@ -1,6 +1,7 @@
 ﻿using HerexamenGame.Commands;
 using HerexamenGame.Content.Animation;
 using HerexamenGame.Interfaces;
+using HerexamenGame.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,7 +15,10 @@ namespace HerexamenGame
     {
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
+        public int Health { get; set; }
+
         private Rectangle _collisionRectangle;
+        
 
         private Texture2D heroTexture;
         public Animation animation;
@@ -22,7 +26,7 @@ namespace HerexamenGame
         private int spawnX = 360;
         private int spawnY = 370;
         private Bullet Bullet;
-
+        
         public IInputReader inputReader;
         private IGameCommand moveCommand;
         private Rectangle idleFrame;
@@ -31,6 +35,8 @@ namespace HerexamenGame
         {
             heroTexture = texture;
             Position = new Vector2(spawnX, spawnY);
+            Health = 100;
+            
 
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(18, 483, 79, 96)));

@@ -23,6 +23,8 @@ namespace HerexamenGame.World
 
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
+        public int Health { get; set; }
+
         private Rectangle _collisionRectangle;
 
         public Enemy(Texture2D newTexture)
@@ -31,6 +33,7 @@ namespace HerexamenGame.World
             Position = new Vector2(0, 375);
             velocity = new Vector2(2,0);
             isVisible = false;
+            Health = 100;
 
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(12, 254, 53, 88)));

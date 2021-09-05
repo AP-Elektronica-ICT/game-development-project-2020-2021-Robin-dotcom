@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier2.png</SourceFile>
-  <SourceTime>2021-08-30T22:09:13.500289+02:00</SourceTime>
-  <DestFile>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier2.xnb</DestFile>
-  <DestTime>2021-09-05T20:11:00.1738453+02:00</DestTime>
+  <SourceFile>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/healthBar.png</SourceFile>
+  <SourceTime>2021-09-05T19:53:46.6163208+02:00</SourceTime>
+  <DestFile>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/healthBar.xnb</DestFile>
+  <DestTime>2021-09-05T20:17:00.8230614+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

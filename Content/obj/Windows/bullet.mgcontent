@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/AP/Semester3/GameDev/HerexamenGame/Content/bullet.png</SourceFile>
+  <SourceFile>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bullet.png</SourceFile>
   <SourceTime>2021-08-31T16:02:55.3516936+02:00</SourceTime>
-  <DestFile>D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/bullet.xnb</DestFile>
-  <DestTime>2021-08-31T16:05:17.5685005+02:00</DestTime>
+  <DestFile>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/bullet.xnb</DestFile>
+  <DestTime>2021-09-05T20:10:59.8147984+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
