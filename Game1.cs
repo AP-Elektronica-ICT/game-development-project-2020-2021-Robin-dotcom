@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace HerexamenGame
 {
@@ -154,12 +155,26 @@ namespace HerexamenGame
                         }
 
                     }
+                    foreach (Bullet bullet in bullet.bullets)
+                    {
+                        if (enemy.enemies.Count() > 0 && collisionManager.CheckCollision(bullet.CollisionRectangle, enemy.enemies.First().CollisionRectangle))
+                        {
+                            enemy.enemies[0].Health = 0;
+                            bullet.bullets.Remove(bullet);
+                            Debug.WriteLine("test");
+                        }
+                        if (collisionManager.CheckCollision(bullet.CollisionRectangle, hero.CollisionRectangle))
+                        {
+                            Debug.WriteLine("Hero hit");
+                        }
+                        //Debug.WriteLine(bullet.Position);
+                    }
 
                     healthBar.Update(hero);
-                    if (hero.Health == 0)
-                    {
-                        CurrentGameState = GameState.Respawn;
-                    }
+                    //if (hero.Health == 0)
+                    //{
+                    //    CurrentGameState = GameState.Respawn;
+                    //}
 
                     break;
                 default:

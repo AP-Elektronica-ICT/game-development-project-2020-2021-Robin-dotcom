@@ -58,7 +58,10 @@ namespace HerexamenGame.World
                 enemy.animation.Update(gameTime);
                 enemy._collisionRectangle.X = (int)enemy.Position.X;
                 enemy.CollisionRectangle = enemy._collisionRectangle;
-
+                if (enemy.Health == 0)
+                {
+                    enemy.isVisible = false;
+                }
                 if (enemy.Position.X > 1600)
                 {
                     enemy.isVisible = false;

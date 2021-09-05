@@ -33,7 +33,7 @@ namespace HerexamenGame
             texture = newTexture;
             isVisible = false;
             bulletSize = new Rectangle(65, 156, 273, 91);
-            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 273, 91);
+            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 10, 10);
         }
 
         public void Update(Hero hero)
@@ -53,7 +53,7 @@ namespace HerexamenGame
                     {
                         bullet.isVisible = false;
                     }
-                bullet._collisionRectangle.X = (int)Position.X;
+                bullet._collisionRectangle.X = (int)bullet.Position.X;
                 bullet.CollisionRectangle = bullet._collisionRectangle;
 
             }
