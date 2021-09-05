@@ -56,7 +56,7 @@ namespace HerexamenGame.World
             {
                 enemy.Position += enemy.velocity;
                 enemy.animation.Update(gameTime);
-                enemy._collisionRectangle.X = (int)Position.X;
+                enemy._collisionRectangle.X = (int)enemy.Position.X;
                 enemy.CollisionRectangle = enemy._collisionRectangle;
 
                 if (enemy.Position.X > 1600)
@@ -85,9 +85,10 @@ namespace HerexamenGame.World
         {
             Enemy newEnemy = new Enemy(texture);
             //newEnemy.position = new Vector2(spawn.position.X, spawn.position.Y);
-            newEnemy.Position = new Vector2(0, 375); 
-            newEnemy.velocity = new Vector2(2, 0);
+            //newEnemy.Position = new Vector2(0, 375); 
+            //newEnemy.velocity = new Vector2(2, 0);
             newEnemy.isVisible = true;
+            //newEnemy._collisionRectangle = new Rectangle((int)newEnemy.Position.X, (int)newEnemy.Position.Y, 54, 89);
             enemies.Add(newEnemy);
         }
 
