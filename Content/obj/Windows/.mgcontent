@@ -5,9 +5,13 @@
   <Config />
   <SourceFiles>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bullet.png</File>
+    <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/DiedScreen.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/forestbackground.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/healthBar.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/healthBar2.jpg</File>
+    <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/MainMenuBackGround.png</File>
+    <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/playbutton.png</File>
+    <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/RestartButton.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier1.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier2.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier3.png</File>
@@ -16,6 +20,10 @@
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/zombie1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

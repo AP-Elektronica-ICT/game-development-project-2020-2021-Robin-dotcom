@@ -63,6 +63,7 @@ namespace HerexamenGame.World
                 {
                     enemy.isVisible = false;
                 }
+                
 
             }
             for (int i = 0; i < enemies.Count; i++)

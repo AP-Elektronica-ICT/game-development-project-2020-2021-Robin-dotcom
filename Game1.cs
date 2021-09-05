@@ -1,5 +1,6 @@
 ﻿using HerexamenGame.Collision;
 using HerexamenGame.Input;
+using HerexamenGame.Visuals;
 using HerexamenGame.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,6 +15,14 @@ namespace HerexamenGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        enum GameState
+        {
+            MainMenu,
+            Options,
+            Playing,
+            Respawn,
+        }
+        GameState CurrentGameState = GameState.MainMenu;
         //Textures
         public Texture2D textureBackground;
         public Texture2D textureSoldier1;
@@ -24,12 +33,17 @@ namespace HerexamenGame
         public Texture2D textureBullet;
         public Texture2D textureZombie1;
         public Texture2D textureHealthBar;
+        public Texture2D textureMainMenuBackground;
+        public Texture2D textureButtonPlay;
+        public Texture2D textureDeadBackground;
+        public Texture2D textureButtonRespawn;
 
         //Viewport
         public int screenWidth;
         public int screenHeight;
 
         //Objects
+        
         Background background;
         Hero hero;
         Bullet bullet;
@@ -37,6 +51,8 @@ namespace HerexamenGame
         EnemySpawn spawn;
         CollisionManager collisionManager;
         HealthBar healthBar;
+        Button buttonPlay;
+        Button buttonRespawn;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -49,6 +65,7 @@ namespace HerexamenGame
             // TODO: Add your initialization logic here
 
             collisionManager = new CollisionManager();
+            
 
             base.Initialize();
         }
@@ -67,6 +84,11 @@ namespace HerexamenGame
             textureBullet = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/HerexamenGame/Content/bin/Windows/bullet");
             textureZombie1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/zombie1");
             textureHealthBar = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/healthBar2");
+            textureButtonPlay = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/playbutton");
+            textureMainMenuBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/MainMenuBackGround");
+            textureDeadBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/DiedScreen");
+            textureButtonRespawn = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
+
 
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
@@ -79,36 +101,70 @@ namespace HerexamenGame
         {
             //var keuze = Menu.GetMenu();
 
+            buttonPlay = new Button(textureButtonPlay, _graphics.GraphicsDevice);
+            buttonPlay.setPosition(new Vector2((screenWidth / 2), (screenHeight / 3)));
+            buttonRespawn = new Button(textureButtonRespawn, _graphics.GraphicsDevice);
+            buttonRespawn.setPosition(new Vector2((screenWidth / 2), (screenHeight / 3)));
             background = new Background(textureBackground, screenWidth, screenHeight);
             bullet = new Bullet(textureBullet);
             hero = new Hero(textureSoldier1, new KeyBoardReader(), screenWidth, bullet);
             enemy = new Enemy(textureZombie1);
             spawn = new EnemySpawn(enemy);
             healthBar = new HealthBar(textureHealthBar);
+
             //startUpMenu = new StartUpMenu(textureButton, new Vector2((GraphicsDevice.Viewport.Width / 2) - 50, 200));
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            MouseState mouse = Mouse.GetState();
+
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //    Exit();
 
             // TODO: Add your update logic here
-            background.Update(hero);
-            
-            hero.Update(gameTime);
-            spawn.Update(gameTime);
-            foreach (Enemy enemy in enemy.enemies)
+            switch (CurrentGameState)
             {
-                if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
-                {
-                    hero.Health -= 5;
-                }
+                case GameState.MainMenu:
+                    if (buttonPlay.isClicked == true)
+                    {
+                        CurrentGameState = GameState.Playing;
+                        
+                    }
+                    buttonPlay.Update(mouse);
+                    break;
+                case GameState.Options:
+                    break;
+                case GameState.Respawn:
+                    if (buttonRespawn.isClicked == true)
+                    {
+                        CurrentGameState = GameState.MainMenu;
+                    }
+                    break;
+                case GameState.Playing:
+                    background.Update(hero);
+
+                    hero.Update(gameTime);
+                    spawn.Update(gameTime);
+                    foreach (Enemy enemy in enemy.enemies)
+                    {
+                        if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
+                        {
+                            hero.Health -= 5;
+                        }
+
+                    }
+
+                    healthBar.Update(hero);
+                    if (hero.Health == 0)
+                    {
+                        CurrentGameState = GameState.Respawn;
+                    }
+
+                    break;
+                default:
+                    break;
             }
-
-            healthBar.Update(hero);
-            
-
             base.Update(gameTime);
         }
 
@@ -117,21 +173,42 @@ namespace HerexamenGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    _spriteBatch.Begin();
+                    _spriteBatch.Draw(textureMainMenuBackground, new Rectangle(0, 0, screenWidth, screenHeight), Color.White );
+                    buttonPlay.Draw(_spriteBatch);
+                    _spriteBatch.End();
+                    break;
+                case GameState.Options:
+                    break;
+                case GameState.Respawn:
+                    _spriteBatch.Begin();
+                    _spriteBatch.Draw(textureDeadBackground, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    buttonRespawn.Draw(_spriteBatch);
+                    _spriteBatch.End();
+                    break;
+                case GameState.Playing:
+                    _spriteBatch.Begin();
 
-            background.Draw(_spriteBatch);
-            foreach (Bullet bullet in bullet.bullets)
-            {
-                bullet.Draw(_spriteBatch);
+                    background.Draw(_spriteBatch);
+                    foreach (Bullet bullet in bullet.bullets)
+                    {
+                        bullet.Draw(_spriteBatch);
+                    }
+                    foreach (Enemy enemy in enemy.enemies)
+                    {
+                        enemy.Draw(_spriteBatch);
+                    }
+                    hero.Draw(_spriteBatch);
+                    healthBar.Draw(_spriteBatch);
+
+                    _spriteBatch.End();
+                    break;
+                default:
+                    break;
             }
-            foreach (Enemy enemy in enemy.enemies)
-            {
-                enemy.Draw(_spriteBatch);
-            }
-            hero.Draw(_spriteBatch);
-            healthBar.Draw(_spriteBatch);
-            
-            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
