@@ -1,4 +1,5 @@
-﻿using HerexamenGame.Commands;
+﻿using HerexamenGame.AnimationTypes;
+using HerexamenGame.Commands;
 using HerexamenGame.Content.Animation;
 using HerexamenGame.Interfaces;
 using Microsoft.Xna.Framework;
@@ -14,7 +15,8 @@ namespace HerexamenGame.World
         public Texture2D texture;
         //public Vector2 position;
         public Vector2 velocity;
-        public Animation animation;
+        private WalkingZombieAnimation walkingZombieAnimation;
+        private DeathZombieAnimation deathZombieAnimation; 
         Random r = new Random();
         public List<Enemy> enemies = new List<Enemy>();
         private IGameCommand moveCommand;
@@ -35,16 +37,9 @@ namespace HerexamenGame.World
             isVisible = false;
             Health = 100;
 
-            animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle(12, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(88, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(175, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(258, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(338, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(427, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(518, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(594, 254, 53, 88)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(670, 254, 53, 88)));
+            deathZombieAnimation = new DeathZombieAnimation();
+            walkingZombieAnimation = new WalkingZombieAnimation();
+            
 
             moveCommand = new MoveCommand(new Vector2(1,0));
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 54, 89);
@@ -55,12 +50,17 @@ namespace HerexamenGame.World
             foreach (Enemy enemy in enemies)
             {
                 enemy.Position += enemy.velocity;
-                enemy.animation.Update(gameTime);
+                enemy.walkingZombieAnimation.Animation.Update(gameTime);
                 enemy._collisionRectangle.X = (int)enemy.Position.X;
                 enemy.CollisionRectangle = enemy._collisionRectangle;
                 if (enemy.Health == 0)
                 {
                     enemy.isVisible = false;
+                    //enemy.deathZombieAnimation.Animation.Update(gameTime);
+                    //if (enemy.deathZombieAnimation.AnimationEnded())
+                    //{
+                    //    enemy.isVisible = false;
+                    //}
                 }
                 if (enemy.Position.X > 1600)
                 {
@@ -109,11 +109,11 @@ namespace HerexamenGame.World
         {
             if (mirrored)
             {
-                sprite.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0);
+                sprite.Draw(texture, Position, walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0);
             }
             else
             {
-                sprite.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
+                sprite.Draw(texture, Position, walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
             }
         }
 

@@ -93,7 +93,7 @@ namespace HerexamenGame
                 newBullet.direction = new Vector2(1, 0);
             }
             newBullet.velocity = new Vector2(20, 0);
-            newBullet.Position = new Vector2(hero.Position.X, hero.Position.Y+(hero.animation.CurrentFrame.SourceRectangle.Height-30));
+            newBullet.Position = new Vector2(hero.Position.X, hero.Position.Y+(hero.walkingHeroAnimation.Animation.CurrentFrame.SourceRectangle.Height-30));
             newBullet.isVisible = true;
 
             if (bullets.Count() < 20)

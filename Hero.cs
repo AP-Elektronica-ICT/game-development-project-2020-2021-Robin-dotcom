@@ -1,4 +1,5 @@
-﻿using HerexamenGame.Commands;
+﻿using HerexamenGame.AnimationTypes;
+using HerexamenGame.Commands;
 using HerexamenGame.Content.Animation;
 using HerexamenGame.Interfaces;
 using HerexamenGame.World;
@@ -23,7 +24,7 @@ namespace HerexamenGame
         
 
         private Texture2D heroTexture;
-        public Animation animation;
+        public WalkingHeroAnimation walkingHeroAnimation;
         private int screenWidth;
         private int spawnX = 360;
         private int spawnY = 370;
@@ -41,19 +42,8 @@ namespace HerexamenGame
             Health = 100;
             direction = new Vector2(0,0);
 
-            animation = new Animation();
-            animation.AddFrame(new AnimationFrame(new Rectangle(18, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(128, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(239, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(350, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(456, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(562, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(669, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(777, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(886, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(998, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(1100, 483, 79, 96)));
-            animation.AddFrame(new AnimationFrame(new Rectangle(1213, 483, 79, 96)));
+            walkingHeroAnimation = new WalkingHeroAnimation();
+
 
             inputReader = reader;
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 80, 97);
@@ -83,16 +73,16 @@ namespace HerexamenGame
             {
                 Position = new Vector2(100, spawnY); 
             }
-            if (Position.X + animation.CurrentFrame.SourceRectangle.Width >= screenWidth -100)
+            if (Position.X + walkingHeroAnimation.Animation.CurrentFrame.SourceRectangle.Width >= screenWidth -100)
             {
-                Position = new Vector2(screenWidth - animation.CurrentFrame.SourceRectangle.Width-100, spawnY);
+                Position = new Vector2(screenWidth - walkingHeroAnimation.Animation.CurrentFrame.SourceRectangle.Width-100, spawnY);
             }
             if (Position.Y < spawnY || Position.Y > spawnY)
             {
                 Position = new Vector2(Position.X, spawnY);
             }
-            
-            animation.Update(gametime);
+
+            walkingHeroAnimation.Animation.Update(gametime);
         }
 
         private void MoveHorizontal(Vector2 direction)
@@ -103,11 +93,11 @@ namespace HerexamenGame
         {
             if (inputReader.ReadInput() == new Vector2(-1, 0))
             {
-                spriteBatch.Draw(heroTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0f);
+                spriteBatch.Draw(heroTexture, Position, walkingHeroAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0f);
             }
             else if (inputReader.ReadInput() == new Vector2(1, 0))
             {
-                spriteBatch.Draw(heroTexture, Position, animation.CurrentFrame.SourceRectangle, Color.White);
+                spriteBatch.Draw(heroTexture, Position, walkingHeroAnimation.Animation.CurrentFrame.SourceRectangle, Color.White);
 
             }
             else if (inputReader.LastKey().IsKeyUp(Keys.Left))
