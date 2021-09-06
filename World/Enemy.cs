@@ -31,7 +31,7 @@ namespace HerexamenGame.World
         {
             texture = newTexture;
             Position = new Vector2(0, 375);
-            velocity = new Vector2(2,0);
+            velocity = new Vector2(1,0);
             isVisible = false;
             Health = 100;
 

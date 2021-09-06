@@ -19,7 +19,7 @@ namespace HerexamenGame
         enum GameState
         {
             MainMenu,
-            Options,
+            Paused,
             Playing,
             Respawn,
         }
@@ -38,10 +38,14 @@ namespace HerexamenGame
         public Texture2D textureButtonPlay;
         public Texture2D textureDeadBackground;
         public Texture2D textureButtonRespawn;
+        //public Texture2D textureButtonResume;
+        //public Texture2D textureButtonQuit;
+        //public Texture2D texturePausedBackground;
 
         //Viewport
         public int screenWidth;
         public int screenHeight;
+    
 
         //Objects
         
@@ -54,6 +58,8 @@ namespace HerexamenGame
         HealthBar healthBar;
         Button buttonPlay;
         Button buttonRespawn;
+        //Button buttonResume;
+        //Button buttonQuit;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -89,7 +95,9 @@ namespace HerexamenGame
             textureMainMenuBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/MainMenuBackGround");
             textureDeadBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/DiedScreen");
             textureButtonRespawn = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
-
+            //textureButtonQuit = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
+            //textureButtonResume = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
+            //texturePausedBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
 
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
@@ -134,7 +142,7 @@ namespace HerexamenGame
                     }
                     buttonPlay.Update(mouse);
                     break;
-                case GameState.Options:
+                case GameState.Paused:
                     break;
                 case GameState.Respawn:
                     if (buttonRespawn.isClicked == true)
@@ -143,6 +151,10 @@ namespace HerexamenGame
                     }
                     break;
                 case GameState.Playing:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        CurrentGameState = GameState.Paused;
+                    }
                     background.Update(hero);
 
                     hero.Update(gameTime);
@@ -151,7 +163,15 @@ namespace HerexamenGame
                     {
                         if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
                         {
+                            enemy.Position = new Vector2 ((int)hero.Position.X - hero.CollisionRectangle.Width/2, (int)hero.Position.Y);
                             hero.Health -= 5;
+                            collisionManager.hit = true;
+                        }
+                        if (collisionManager.hit)
+                        {
+                            enemy.Position = new Vector2(enemy.Position.X - 10, enemy.Position.Y);
+                            collisionManager.hit = false;
+
                         }
 
                     }
@@ -171,10 +191,10 @@ namespace HerexamenGame
                     }
 
                     healthBar.Update(hero);
-                    //if (hero.Health == 0)
-                    //{
-                    //    CurrentGameState = GameState.Respawn;
-                    //}
+                    if (hero.Health == 0)
+                    {
+                        CurrentGameState = GameState.Respawn;
+                    }
 
                     break;
                 default:
@@ -196,7 +216,7 @@ namespace HerexamenGame
                     buttonPlay.Draw(_spriteBatch);
                     _spriteBatch.End();
                     break;
-                case GameState.Options:
+                case GameState.Paused:
                     break;
                 case GameState.Respawn:
                     _spriteBatch.Begin();
