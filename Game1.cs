@@ -17,6 +17,7 @@ namespace HerexamenGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        //GameStates
         enum GameState
         {
             MainMenu,
@@ -25,6 +26,7 @@ namespace HerexamenGame
             Respawn,
         }
         GameState CurrentGameState = GameState.MainMenu;
+
         //Textures
         public Texture2D textureBackground;
         public Texture2D textureSoldier1;
@@ -40,17 +42,15 @@ namespace HerexamenGame
         public Texture2D textureDeadBackground;
         public Texture2D textureButtonRespawn;
         public SpriteFont font;
-        //public Texture2D textureButtonResume;
-        //public Texture2D textureButtonQuit;
-        //public Texture2D texturePausedBackground;
 
         //Viewport
         public int screenWidth;
         public int screenHeight;
+
+        //Variables
         public int score = 0;
 
-        //Objects
-        
+        //Objects        
         Background background;
         Hero hero;
         Bullet bullet;
@@ -63,8 +63,6 @@ namespace HerexamenGame
         MainMenu mainMenu;
         Respawn respawnMenu;
 
-        //Button buttonResume;
-        //Button buttonQuit;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -101,9 +99,7 @@ namespace HerexamenGame
             textureMainMenuBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/MainMenuBackGround");
             textureDeadBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/DiedScreen");
             textureButtonRespawn = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
-            //textureButtonQuit = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
-            //textureButtonResume = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
-            //texturePausedBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
+            
 
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;

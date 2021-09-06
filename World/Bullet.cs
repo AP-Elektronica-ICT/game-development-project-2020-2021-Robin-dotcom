@@ -45,18 +45,18 @@ namespace HerexamenGame
         {
             foreach (Bullet bullet in bullets)
             {
-
+                bullet.MoveHorizontal(bullet.direction);
                 //MoveHorizontal(bullet.direction); ;
-                if (hero.inputReader.LastKey().IsKeyUp(Keys.Left) && bullet.Position.X < 800)
-                {
-                    bullet.Position += bullet.velocity;
+                //if (hero.inputReader.LastKey().IsKeyUp(Keys.Left) && bullet.isVisible)
+                //{
+                //    //bullet.Position += bullet.velocity;
+                    
+                //}
+                //else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right) && bullet.Position.X < 800)
+                //{
+                //    bullet.Position -= bullet.velocity;
 
-                }
-                else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right) && bullet.Position.X < 800)
-                {
-                    bullet.Position -= bullet.velocity;
-
-                }
+                //}
                 if (Vector2.Distance(bullet.Position, hero.Position) > 800)
                 {
                     bullet.isVisible = false;
@@ -86,11 +86,11 @@ namespace HerexamenGame
             Bullet newBullet = new Bullet(texture);
             if (hero.inputReader.LastKey().IsKeyUp(Keys.Left))
             {
-                newBullet.direction = new Vector2(-1, 0);
+                newBullet.direction = new Vector2(1, 0);
             }
             else 
             { 
-                newBullet.direction = new Vector2(1, 0);
+                newBullet.direction = new Vector2(-1, 0);
             }
             newBullet.velocity = new Vector2(20, 0);
             newBullet.Position = new Vector2(hero.Position.X, hero.Position.Y+(hero.walkingHeroAnimation.Animation.CurrentFrame.SourceRectangle.Height-30));

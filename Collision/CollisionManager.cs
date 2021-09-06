@@ -16,6 +16,5 @@ namespace HerexamenGame.Collision
             return false;
         }
         public bool hit = false;
-
     }
 }
