@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/RestartButton.png","D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton.xnb","TextureProcessor","Texture2DContent",10268,830885,0,2095935
+"D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/Font.spritefont","D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/Font.xnb","FontDescriptionProcessor","SpriteFontContent",2063,21538,0,4793751

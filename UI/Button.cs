@@ -20,14 +20,14 @@ namespace HerexamenGame.Visuals
         public Button(Texture2D newTexture, GraphicsDevice graphics)
         {
             texture = newTexture;
-            size = new Vector2(graphics.Viewport.Width / 8, graphics.Viewport.Height / 30);
+            size = new Vector2(graphics.Viewport.Width / 5, graphics.Viewport.Height / 20);
         }
 
         bool down;
         public bool isClicked;
         public void Update(MouseState mouse)
         {
-            rectangle = new Rectangle((int)position.X, (int)position.X, (int)size.X, (int)size.Y);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
             Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
 

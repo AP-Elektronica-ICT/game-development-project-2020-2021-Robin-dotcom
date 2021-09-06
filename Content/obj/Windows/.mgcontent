@@ -6,6 +6,7 @@
   <SourceFiles>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bullet.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/DiedScreen.png</File>
+    <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/Font.spritefont</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/forestbackground.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/healthBar.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/healthBar2.jpg</File>
@@ -20,6 +21,7 @@
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/zombie1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -38,6 +38,7 @@ namespace HerexamenGame
         public Texture2D textureButtonPlay;
         public Texture2D textureDeadBackground;
         public Texture2D textureButtonRespawn;
+        public SpriteFont font;
         //public Texture2D textureButtonResume;
         //public Texture2D textureButtonQuit;
         //public Texture2D texturePausedBackground;
@@ -45,7 +46,7 @@ namespace HerexamenGame
         //Viewport
         public int screenWidth;
         public int screenHeight;
-    
+        public int score = 0;
 
         //Objects
         
@@ -58,6 +59,7 @@ namespace HerexamenGame
         HealthBar healthBar;
         Button buttonPlay;
         Button buttonRespawn;
+
         //Button buttonResume;
         //Button buttonQuit;
         public Game1()
@@ -82,6 +84,7 @@ namespace HerexamenGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            font = Content.Load<SpriteFont>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/font");
             textureBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/forestbackground");
             textureSoldier1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier1");
             textureSoldier2 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier2");
@@ -111,7 +114,7 @@ namespace HerexamenGame
             //var keuze = Menu.GetMenu();
 
             buttonPlay = new Button(textureButtonPlay, _graphics.GraphicsDevice);
-            buttonPlay.setPosition(new Vector2((screenWidth / 2), (screenHeight / 3)));
+            buttonPlay.setPosition(new Vector2((screenWidth / 2), (screenHeight / 2)));
             buttonRespawn = new Button(textureButtonRespawn, _graphics.GraphicsDevice);
             buttonRespawn.setPosition(new Vector2((screenWidth / 2), (screenHeight / 3)));
             background = new Background(textureBackground, screenWidth, screenHeight);
@@ -121,8 +124,7 @@ namespace HerexamenGame
             spawn = new EnemySpawn(enemy);
             healthBar = new HealthBar(textureHealthBar);
 
-            //startUpMenu = new StartUpMenu(textureButton, new Vector2((GraphicsDevice.Viewport.Width / 2) - 50, 200));
-        }
+       }
 
         protected override void Update(GameTime gameTime)
         {
@@ -180,14 +182,11 @@ namespace HerexamenGame
                         if (enemy.enemies.Count() > 0 && collisionManager.CheckCollision(bullet.CollisionRectangle, enemy.enemies.First().CollisionRectangle))
                         {
                             enemy.enemies[0].Health -= 25;
-                            bullet.isVisible = false;
+                            score++;
+                            //bullet.isVisible = false;
                             Debug.WriteLine("test");
                         }
-                        if (collisionManager.CheckCollision(bullet.CollisionRectangle, hero.CollisionRectangle))
-                        {
-                            Debug.WriteLine("Hero hit");
-                        }
-                        //Debug.WriteLine(bullet.Position);
+                        
                     }
 
                     healthBar.Update(hero);
@@ -238,7 +237,7 @@ namespace HerexamenGame
                     }
                     hero.Draw(_spriteBatch);
                     healthBar.Draw(_spriteBatch);
-
+                    _spriteBatch.DrawString(font, "Kills: " + score/4, new Vector2(700, 10), Color.Red);
                     _spriteBatch.End();
                     break;
                 default:
