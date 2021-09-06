@@ -18,9 +18,11 @@
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier3.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier4.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/soldier5.png</File>
+    <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/titleFont.png</File>
     <File>D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/zombie1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

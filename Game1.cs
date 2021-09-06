@@ -41,7 +41,10 @@ namespace HerexamenGame
         public Texture2D textureButtonPlay;
         public Texture2D textureDeadBackground;
         public Texture2D textureButtonRespawn;
+
+        //Fonts
         public SpriteFont font;
+        public SpriteFont titleFont;
 
         //Viewport
         public int screenWidth;
@@ -86,6 +89,7 @@ namespace HerexamenGame
 
             // TODO: use this.Content to load your game content here
             font = Content.Load<SpriteFont>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/font");
+            font = Content.Load<SpriteFont>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/titleFont");
             textureBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/forestbackground");
             textureSoldier1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier1");
             textureSoldier2 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier2");
@@ -222,6 +226,7 @@ namespace HerexamenGame
                 case GameState.MainMenu:
                     _spriteBatch.Begin();
                     _spriteBatch.Draw(textureMainMenuBackground, new Rectangle(0, 0, screenWidth, screenHeight), Color.White );
+                    _spriteBatch.DrawString(titleFont, "Zombie Shooter", new Vector2(100, 100), Color.Red, 0, Vector2.Zero, 5f, SpriteEffects.None, 0);  ;
                     buttonPlay.Draw(_spriteBatch);
                     _spriteBatch.End();
                     break;
@@ -239,16 +244,7 @@ namespace HerexamenGame
 
                     background.Draw(_spriteBatch);
                     bullet.Draw(_spriteBatch);
-                    enemy.Draw(_spriteBatch);
-                    //foreach (Bullet bullet in bullet.bullets)
-                    //{
-                    //    bullet.Draw(_spriteBatch);
-                    //}
-                    //foreach (Enemy enemy in enemy.enemies)
-                    //{
-                       
-                    //    enemy.Draw(_spriteBatch);
-                    //}
+                    enemy.Draw(_spriteBatch);                    
                     hero.Draw(_spriteBatch);
                     healthBar.Draw(_spriteBatch);
                     _spriteBatch.DrawString(font, "Kills: " + score/4, new Vector2(700, 10), Color.Red);
