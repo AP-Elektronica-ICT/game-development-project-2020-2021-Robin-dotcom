@@ -65,6 +65,7 @@ namespace HerexamenGame
             //Don't exceed window
             CheckPosition();
             walkingHeroAnimation.Animation.Update(gametime);
+            
         }
         
         public void Draw(SpriteBatch spriteBatch)

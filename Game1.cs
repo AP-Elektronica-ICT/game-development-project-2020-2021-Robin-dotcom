@@ -53,18 +53,20 @@ namespace HerexamenGame
         //Variables
         public int score = 0;
 
-        //Objects        
+        //Objects      
+        public CollisionManager collisionManager;
         Background background;
         Hero hero;
         Bullet bullet;
         Enemy enemy;
-        EnemySpawn spawn;
-        CollisionManager collisionManager;
+        EnemySpawn spawn;        
         HealthBar healthBar;
         Button buttonPlay;
         Button buttonRespawn;
-        MainMenu mainMenu;
-        Respawn respawnMenu;
+
+        //Tried to refactor gamestates
+        //MainMenu mainMenu;
+        //Respawn respawnMenu;
 
         public Game1()
         {
@@ -75,11 +77,6 @@ namespace HerexamenGame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
-            collisionManager = new CollisionManager();
-            
-
             base.Initialize();
         }
 
@@ -89,7 +86,6 @@ namespace HerexamenGame
 
             // TODO: use this.Content to load your game content here
             font = Content.Load<SpriteFont>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/font");
-            font = Content.Load<SpriteFont>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/titleFont");
             textureBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/forestbackground");
             textureSoldier1 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier1");
             textureSoldier2 = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/soldier2");
@@ -104,17 +100,14 @@ namespace HerexamenGame
             textureDeadBackground = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/DiedScreen");
             textureButtonRespawn = Content.Load<Texture2D>("D:/AP/Semester3/GameDev/github/game-development-project-2020-2021-Robin-dotcom/Content/bin/Windows/RestartButton");
             
-
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
 
-            //Size = new Rectangle(0,0, (int)(textureBackground.Width * Scale)
             InitializeGameObjects();
         }
 
         private void InitializeGameObjects()
         {
-            //var keuze = Menu.GetMenu();
 
             buttonPlay = new Button(textureButtonPlay, _graphics.GraphicsDevice);
             buttonPlay.setPosition(new Vector2((screenWidth / 2), (screenHeight / 2)));
@@ -126,29 +119,24 @@ namespace HerexamenGame
             enemy = new Enemy(textureZombie1);
             spawn = new EnemySpawn(enemy);
             healthBar = new HealthBar(textureHealthBar);
-            mainMenu = new MainMenu(textureMainMenuBackground, buttonPlay, screenWidth, screenHeight);
-            respawnMenu = new Respawn(textureDeadBackground, buttonPlay, screenWidth, screenHeight, font, score);
+            collisionManager = new CollisionManager(hero, enemy, bullet);
+            ////Tried to refactor gamestates
+            //mainMenu = new MainMenu(textureMainMenuBackground, buttonPlay, screenWidth, screenHeight);
+            //respawnMenu = new Respawn(textureDeadBackground, buttonPlay, screenWidth, screenHeight, font, score);
 
         }
 
         protected override void Update(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
-
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //    Exit();
-
-            // TODO: Add your update logic here
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
                     if (buttonPlay.isClicked == true)
                     {
                         CurrentGameState = GameState.Playing;
-
                     }
                     buttonPlay.Update(mouse);
-                    //CurrentGameState = (GameState)mainMenu.Update();
                     break;
                 case GameState.Paused:
                     break;
@@ -167,6 +155,8 @@ namespace HerexamenGame
 
                     hero.Update(gameTime);
                     spawn.Update(gameTime);
+                    //Didn't manage to refactor two foreach loops, errors keep comming when declaring objects 
+                    //in wrong order in InitialzeGameObject() method
                     foreach (Enemy enemy in enemy.enemies)
                     {
                         if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
@@ -174,7 +164,6 @@ namespace HerexamenGame
                             if (enemy.velocity.X == -1)
                             {
                                 enemy.Position = new Vector2((int)hero.Position.X + hero.CollisionRectangle.Width / 2, (int)hero.Position.Y);
-
                             }
                             else
                             {      
@@ -187,9 +176,7 @@ namespace HerexamenGame
                         {
                             enemy.Position = new Vector2(enemy.Position.X - 10, enemy.Position.Y);
                             collisionManager.hit = false;
-
                         }
-
                     }
                     foreach (Bullet bullet in bullet.bullets)
                     {
@@ -199,16 +186,13 @@ namespace HerexamenGame
                             score++;
                             bullet.isVisible = false;
                             Debug.WriteLine("test");
-                        }
-                        
+                        }                        
                     }
-
                     healthBar.Update(hero);
                     if (hero.Health < 0)
                     {
                         CurrentGameState = GameState.Respawn;
                     }
-
                     break;
                 default:
                     break;
@@ -220,13 +204,12 @@ namespace HerexamenGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
                     _spriteBatch.Begin();
                     _spriteBatch.Draw(textureMainMenuBackground, new Rectangle(0, 0, screenWidth, screenHeight), Color.White );
-                    _spriteBatch.DrawString(titleFont, "Zombie Shooter", new Vector2(100, 100), Color.Red, 0, Vector2.Zero, 5f, SpriteEffects.None, 0);  ;
+                    _spriteBatch.DrawString(font, "Zombie Shooter", new Vector2(100, 100), Color.Red, 0, Vector2.Zero, 5f, SpriteEffects.None, 0);  ;
                     buttonPlay.Draw(_spriteBatch);
                     _spriteBatch.End();
                     break;
@@ -241,7 +224,6 @@ namespace HerexamenGame
                     break;
                 case GameState.Playing:
                     _spriteBatch.Begin();
-
                     background.Draw(_spriteBatch);
                     bullet.Draw(_spriteBatch);
                     enemy.Draw(_spriteBatch);                    

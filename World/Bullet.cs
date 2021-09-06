@@ -12,18 +12,12 @@ namespace HerexamenGame
 {
     public class Bullet : ITransform
     {
-         Texture2D texture;
-
-        
+        public Texture2D texture;        
         public Vector2 direction;
         public Vector2 origin;
         public Vector2 velocity;
         public List<Bullet> bullets = new List<Bullet>();
-        private Rectangle bulletSize;
-        private IGameCommand moveCommand;
         public IInputReader inputReader;
-
-
         public bool isVisible;
 
         public Vector2 Position { get; set; }
@@ -31,6 +25,8 @@ namespace HerexamenGame
         public int Health { get; set; }
 
         private Rectangle _collisionRectangle;
+        private Rectangle bulletSize;
+        private IGameCommand moveCommand;
 
         public Bullet(Texture2D newTexture)
         {
@@ -46,27 +42,13 @@ namespace HerexamenGame
             foreach (Bullet bullet in bullets)
             {
                 bullet.MoveHorizontal(bullet.direction);
-                //MoveHorizontal(bullet.direction); ;
-                //if (hero.inputReader.LastKey().IsKeyUp(Keys.Left) && bullet.isVisible)
-                //{
-                //    //bullet.Position += bullet.velocity;
-                    
-                //}
-                //else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right) && bullet.Position.X < 800)
-                //{
-                //    bullet.Position -= bullet.velocity;
-
-                //}
                 if (Vector2.Distance(bullet.Position, hero.Position) > 800)
                 {
                     bullet.isVisible = false;
                 }
                 bullet._collisionRectangle.X = (int)bullet.Position.X;
                 bullet.CollisionRectangle = bullet._collisionRectangle;
-
             }
-
-
             for (int i = 0; i < bullets.Count; i++)
 			{
                 if (!bullets[i].isVisible)
