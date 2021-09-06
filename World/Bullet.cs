@@ -103,8 +103,11 @@ namespace HerexamenGame
         }
 
         public void Draw(SpriteBatch sprite)
-        {            
-            sprite.Draw(texture, Position, bulletSize, Color.White, 0f, origin, 0.1f, SpriteEffects.None, 0 );            
+        {
+            foreach (Bullet bullet in bullets)
+            {
+                sprite.Draw(texture, bullet.Position, bulletSize, Color.White, 0f, origin, 0.1f, SpriteEffects.None, 0);
+            }
         }
 
     }

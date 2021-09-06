@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace HerexamenGame.GameStates
+namespace HerexamenGame.Screens
 {
     public class Respawn : IGameState
     {

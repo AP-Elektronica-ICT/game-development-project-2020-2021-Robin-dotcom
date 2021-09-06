@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace HerexamenGame.World
@@ -22,6 +23,7 @@ namespace HerexamenGame.World
         private IGameCommand moveCommand;
 
         private bool isVisible;
+        private bool death;
 
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
@@ -51,16 +53,12 @@ namespace HerexamenGame.World
             {
                 enemy.Position += enemy.velocity;
                 enemy.walkingZombieAnimation.Animation.Update(gameTime);
+                enemy.deathZombieAnimation.Animation.Update(gameTime);
                 enemy._collisionRectangle.X = (int)enemy.Position.X;
                 enemy.CollisionRectangle = enemy._collisionRectangle;
                 if (enemy.Health == 0)
                 {
-                    enemy.isVisible = false;
-                    //enemy.deathZombieAnimation.Animation.Update(gameTime);
-                    //if (enemy.deathZombieAnimation.AnimationEnded())
-                    //{
-                    //    enemy.isVisible = false;
-                    //}
+                    enemy.isVisible=false;                    
                 }
                 if (enemy.Position.X > 1600)
                 {
@@ -87,9 +85,7 @@ namespace HerexamenGame.World
         public void Create()
         {
             Enemy newEnemy = new Enemy(texture);
-            //int p = r.Next(2);
-            //if (p == 1)
-            //{
+            
             newEnemy.Position = new Vector2(-400, 370);
             newEnemy.velocity = new Vector2(1, 0);
             //}
@@ -105,16 +101,34 @@ namespace HerexamenGame.World
             enemies.Add(newEnemy);
         }
 
-        public void Draw(SpriteBatch sprite, bool mirrored)
+        public void Draw(SpriteBatch sprite)
         {
-            if (mirrored)
+            foreach (Enemy enemy in enemies)
             {
-                sprite.Draw(texture, Position, walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0);
+                if (enemy.velocity.X == -1)
+                {
+                    sprite.Draw(texture, enemy.Position, enemy.walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0);
+                }
+                else if (enemy.death)
+                {
+                    sprite.Draw(texture, enemy.Position, enemy.deathZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
+                }
+                else
+                {
+                    sprite.Draw(texture, enemy.Position, enemy.walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
+                }
             }
-            else
-            {
-                sprite.Draw(texture, Position, walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
-            }
+            
+            
+
+            //if (mirrored)
+            //{
+                
+            //}
+            //else
+            //{
+            //    sprite.Draw(texture, Position, walkingZombieAnimation.Animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
+            //}
         }
 
     }

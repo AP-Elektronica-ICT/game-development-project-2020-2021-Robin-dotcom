@@ -7,18 +7,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace HerexamenGame.GameStates
+namespace HerexamenGame.Screens
 {
     
-    public class MainMenu : IGameState
+    public class MainMenu 
     {
-        //enum GameStates
-        //{
-        //    MainMenu,
-        //    Paused,
-        //    Playing,
-        //    Respawn,
-        //}
+        public enum GameState
+        {
+            MainMenu,
+            Paused,
+            Playing,
+            Respawn,
+        }
         Button buttonPlay;
         MouseState mouse = Mouse.GetState();        
         public Texture2D texture;
@@ -32,13 +32,14 @@ namespace HerexamenGame.GameStates
             screenWidth = newscreenWidth;
             screenHeight = newscreenHeight;
         }
-        public void Update()
+        public GameState Update()
         {
             if (buttonPlay.isClicked)
             {
-                //return GameStates.Playing;
+                return GameState.Playing;
             }
-            
+            buttonPlay.Update(mouse);
+            return GameState.MainMenu;
         }
 
         public void Draw(SpriteBatch sprite)

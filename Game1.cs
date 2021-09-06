@@ -1,5 +1,5 @@
 ﻿using HerexamenGame.Collision;
-using HerexamenGame.GameStates;
+using HerexamenGame.Screens;
 using HerexamenGame.Input;
 using HerexamenGame.UI;
 using HerexamenGame.World;
@@ -18,7 +18,7 @@ namespace HerexamenGame
         private SpriteBatch _spriteBatch;
 
         //GameStates
-        enum GameState
+        public enum GameState
         {
             MainMenu,
             Paused,
@@ -125,7 +125,7 @@ namespace HerexamenGame
             mainMenu = new MainMenu(textureMainMenuBackground, buttonPlay, screenWidth, screenHeight);
             respawnMenu = new Respawn(textureDeadBackground, buttonPlay, screenWidth, screenHeight, font, score);
 
-       }
+        }
 
         protected override void Update(GameTime gameTime)
         {
@@ -141,9 +141,10 @@ namespace HerexamenGame
                     if (buttonPlay.isClicked == true)
                     {
                         CurrentGameState = GameState.Playing;
-                        
+
                     }
                     buttonPlay.Update(mouse);
+                    //CurrentGameState = (GameState)mainMenu.Update();
                     break;
                 case GameState.Paused:
                     break;
@@ -237,18 +238,17 @@ namespace HerexamenGame
                     _spriteBatch.Begin();
 
                     background.Draw(_spriteBatch);
-                    foreach (Bullet bullet in bullet.bullets)
-                    {
-                        bullet.Draw(_spriteBatch);
-                    }
-                    foreach (Enemy enemy in enemy.enemies)
-                    {
-                        if (enemy.velocity.X == -1)
-                        {
-                            enemy.Draw(_spriteBatch, true);
-                        }
-                        enemy.Draw(_spriteBatch,false);
-                    }
+                    bullet.Draw(_spriteBatch);
+                    enemy.Draw(_spriteBatch);
+                    //foreach (Bullet bullet in bullet.bullets)
+                    //{
+                    //    bullet.Draw(_spriteBatch);
+                    //}
+                    //foreach (Enemy enemy in enemy.enemies)
+                    //{
+                       
+                    //    enemy.Draw(_spriteBatch);
+                    //}
                     hero.Draw(_spriteBatch);
                     healthBar.Draw(_spriteBatch);
                     _spriteBatch.DrawString(font, "Kills: " + score/4, new Vector2(700, 10), Color.Red);
