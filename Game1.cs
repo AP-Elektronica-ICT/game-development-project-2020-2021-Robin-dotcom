@@ -165,7 +165,15 @@ namespace HerexamenGame
                     {
                         if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
                         {
-                            enemy.Position = new Vector2 ((int)hero.Position.X - hero.CollisionRectangle.Width/2, (int)hero.Position.Y);
+                            if (enemy.velocity.X == -1)
+                            {
+                                enemy.Position = new Vector2((int)hero.Position.X + hero.CollisionRectangle.Width / 2, (int)hero.Position.Y);
+
+                            }
+                            else
+                            {      
+                                enemy.Position = new Vector2 ((int)hero.Position.X - hero.CollisionRectangle.Width/2, (int)hero.Position.Y);
+                            }
                             hero.Health -= 1;
                             collisionManager.hit = true;
                         }
@@ -183,14 +191,14 @@ namespace HerexamenGame
                         {
                             enemy.enemies[0].Health -= 25;
                             score++;
-                            //bullet.isVisible = false;
+                            bullet.isVisible = false;
                             Debug.WriteLine("test");
                         }
                         
                     }
 
                     healthBar.Update(hero);
-                    if (hero.Health == 0)
+                    if (hero.Health < 0)
                     {
                         CurrentGameState = GameState.Respawn;
                     }
@@ -220,6 +228,7 @@ namespace HerexamenGame
                 case GameState.Respawn:
                     _spriteBatch.Begin();
                     _spriteBatch.Draw(textureDeadBackground, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    _spriteBatch.DrawString(font, "You killed " + score + " zombies. Well Done!", new Vector2(300, 300), Color.Red);
                     buttonRespawn.Draw(_spriteBatch);
                     _spriteBatch.End();
                     break;
@@ -233,7 +242,11 @@ namespace HerexamenGame
                     }
                     foreach (Enemy enemy in enemy.enemies)
                     {
-                        enemy.Draw(_spriteBatch);
+                        if (enemy.velocity.X == -1)
+                        {
+                            enemy.Draw(_spriteBatch, true);
+                        }
+                        enemy.Draw(_spriteBatch,false);
                     }
                     hero.Draw(_spriteBatch);
                     healthBar.Draw(_spriteBatch);

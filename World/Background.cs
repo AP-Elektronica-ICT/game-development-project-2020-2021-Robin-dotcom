@@ -30,13 +30,13 @@ namespace HerexamenGame.World
 
         public void Update(Hero hero)
         {
-            if (hero.Position.X + hero.animation.CurrentFrame.SourceRectangle.Width >= screenWidth && RightBackup.X != 0 && Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (hero.Position.X + hero.animation.CurrentFrame.SourceRectangle.Width + 100 >= screenWidth && RightBackup.X != 0 && Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 Position.X -= frameMovement;
                 RightBackup.X -= frameMovement;
                 LeftBackup.X -= frameMovement;
             }
-            if (hero.Position.X == 0 && LeftBackup.X != 0 && Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (hero.Position.X == 100 && LeftBackup.X != 0 && Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 Position.X += frameMovement;
                 RightBackup.X += frameMovement;

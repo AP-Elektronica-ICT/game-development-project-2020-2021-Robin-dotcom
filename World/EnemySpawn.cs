@@ -11,8 +11,6 @@ namespace HerexamenGame.World
 {
     public class EnemySpawn
     {
-        
-        public Vector2 position;
         public Random random = new Random();
         private int difficulty = 10;
         private int enemiesloaded = 0;
@@ -22,9 +20,7 @@ namespace HerexamenGame.World
 
         public EnemySpawn(Enemy enemy)
         {
-            enemyToLoad = enemy;
-            position = new Vector2(-800, 370);
-            
+            enemyToLoad = enemy;                        
         }
         public void LoadEnemies(GameTime gameTime)
         {

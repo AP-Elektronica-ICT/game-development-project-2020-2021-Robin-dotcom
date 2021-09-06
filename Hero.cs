@@ -79,13 +79,13 @@ namespace HerexamenGame
             CollisionRectangle = _collisionRectangle;
 
 
-            if (Position.X <= 0)
+            if (Position.X <= 100)
             {
-                Position = new Vector2(0, spawnY); 
+                Position = new Vector2(100, spawnY); 
             }
-            if (Position.X + animation.CurrentFrame.SourceRectangle.Width >= screenWidth)
+            if (Position.X + animation.CurrentFrame.SourceRectangle.Width >= screenWidth -100)
             {
-                Position = new Vector2(screenWidth - animation.CurrentFrame.SourceRectangle.Width, spawnY);
+                Position = new Vector2(screenWidth - animation.CurrentFrame.SourceRectangle.Width-100, spawnY);
             }
             if (Position.Y < spawnY || Position.Y > spawnY)
             {

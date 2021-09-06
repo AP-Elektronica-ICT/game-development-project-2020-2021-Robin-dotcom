@@ -15,7 +15,7 @@ namespace HerexamenGame.World
         //public Vector2 position;
         public Vector2 velocity;
         public Animation animation;
-
+        Random r = new Random();
         public List<Enemy> enemies = new List<Enemy>();
         private IGameCommand moveCommand;
 
@@ -30,8 +30,8 @@ namespace HerexamenGame.World
         public Enemy(Texture2D newTexture)
         {
             texture = newTexture;
-            Position = new Vector2(0, 375);
-            velocity = new Vector2(1,0);
+            //Position = new Vector2(0, 375);
+            //velocity = new Vector2(1,0);
             isVisible = false;
             Health = 100;
 
@@ -46,7 +46,7 @@ namespace HerexamenGame.World
             animation.AddFrame(new AnimationFrame(new Rectangle(594, 254, 53, 88)));
             animation.AddFrame(new AnimationFrame(new Rectangle(670, 254, 53, 88)));
 
-            moveCommand = new MoveCommand(new Vector2(2,0));
+            moveCommand = new MoveCommand(new Vector2(1,0));
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 54, 89);
         }
 
@@ -87,17 +87,34 @@ namespace HerexamenGame.World
         public void Create()
         {
             Enemy newEnemy = new Enemy(texture);
-            //newEnemy.position = new Vector2(spawn.position.X, spawn.position.Y);
+            //int p = r.Next(2);
+            //if (p == 1)
+            //{
+            newEnemy.Position = new Vector2(-400, 370);
+            newEnemy.velocity = new Vector2(1, 0);
+            //}
+            //else
+            //{
+            //    newEnemy.Position = new Vector2(1600, 370);
+            //    newEnemy.velocity = new Vector2(-1, 0);
+            //}
             //newEnemy.Position = new Vector2(0, 375); 
-            //newEnemy.velocity = new Vector2(2, 0);
+            //newEnemy.Position = new Vector2(0, 375); 
             newEnemy.isVisible = true;
-            //newEnemy._collisionRectangle = new Rectangle((int)newEnemy.Position.X, (int)newEnemy.Position.Y, 54, 89);
+            newEnemy._collisionRectangle = new Rectangle((int)newEnemy.Position.X, (int)newEnemy.Position.Y, 54, 89);
             enemies.Add(newEnemy);
         }
 
-        public void Draw(SpriteBatch sprite)
+        public void Draw(SpriteBatch sprite, bool mirrored)
         {
-            sprite.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
+            if (mirrored)
+            {
+                sprite.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.FlipHorizontally, 0);
+            }
+            else
+            {
+                sprite.Draw(texture, Position, animation.CurrentFrame.SourceRectangle, Color.White, 0f, Vector2.One, 1, SpriteEffects.None, 0);
+            }
         }
 
     }
