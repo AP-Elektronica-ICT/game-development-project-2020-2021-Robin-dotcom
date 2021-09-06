@@ -6,23 +6,17 @@ using System.Text;
 
 namespace HerexamenGame.Commands
 {
-    class MoveCommand : IGameCommand
+    class ShootCommand : IGameCommand
     {
-        private Vector2 speed;
-
-        public MoveCommand(Vector2 newSpeed)
+        public Vector2 speed;
+        public ShootCommand()
         {
-            speed = newSpeed;
+            speed = new Vector2(10, 0);
         }
-
         public void Execute(ITransform transform, Vector2 direction)
         {
-            if (transform.Position.X >= 0 && transform.Position.X <= 800)
-            {
-                direction *= speed;
-                transform.Position += direction;
-            }
-            
+            direction *= speed;
+            transform.Position += direction;
         }
 
         public void Undo()

@@ -1,4 +1,5 @@
-﻿using HerexamenGame.Interfaces;
+﻿using HerexamenGame.Commands;
+using HerexamenGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,13 +15,16 @@ namespace HerexamenGame
          Texture2D texture;
 
         
-        public Vector2 velocity;
+        public Vector2 direction;
         public Vector2 origin;
+        public Vector2 velocity;
         public List<Bullet> bullets = new List<Bullet>();
         private Rectangle bulletSize;
+        private IGameCommand moveCommand;
+        public IInputReader inputReader;
 
 
-        bool isVisible;
+        public bool isVisible;
 
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
@@ -31,28 +35,32 @@ namespace HerexamenGame
         public Bullet(Texture2D newTexture)
         {
             texture = newTexture;
+            moveCommand = new MoveCommand(new Vector2(20,0));
             isVisible = false;
             bulletSize = new Rectangle(65, 156, 273, 91);
-            _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 10, 10);
+            _collisionRectangle = new Rectangle((int)Position.X, 426, 10, 10);
         }
 
         public void Update(Hero hero)
         {
             foreach (Bullet bullet in bullets)
             {
-                if (hero.inputReader.LastKey().IsKeyUp(Keys.Left))
+
+                //MoveHorizontal(bullet.direction); ;
+                if (hero.inputReader.LastKey().IsKeyUp(Keys.Left) && bullet.Position.X < 800)
                 {
                     bullet.Position += bullet.velocity;
 
                 }
-                else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right))
+                else if (hero.inputReader.LastKey().IsKeyUp(Keys.Right) && bullet.Position.X < 800)
                 {
                     bullet.Position -= bullet.velocity;
+
                 }
-                    if (Vector2.Distance(bullet.Position, hero.Position) > 800)
-                    {
-                        bullet.isVisible = false;
-                    }
+                if (Vector2.Distance(bullet.Position, hero.Position) > 800)
+                {
+                    bullet.isVisible = false;
+                }
                 bullet._collisionRectangle.X = (int)bullet.Position.X;
                 bullet.CollisionRectangle = bullet._collisionRectangle;
 
@@ -68,11 +76,23 @@ namespace HerexamenGame
                 }
             }
         }
-        
+        private void MoveHorizontal(Vector2 direction)
+        {
+            moveCommand.Execute(this, direction);
+        }
+
         public void Shoot(Hero hero)
         {
             Bullet newBullet = new Bullet(texture);
-            newBullet.velocity = new Vector2(20,0);
+            if (hero.inputReader.LastKey().IsKeyUp(Keys.Left))
+            {
+                newBullet.direction = new Vector2(-1, 0);
+            }
+            else 
+            { 
+                newBullet.direction = new Vector2(1, 0);
+            }
+            newBullet.velocity = new Vector2(20, 0);
             newBullet.Position = new Vector2(hero.Position.X, hero.Position.Y+(hero.animation.CurrentFrame.SourceRectangle.Height-30));
             newBullet.isVisible = true;
 

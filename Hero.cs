@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace HerexamenGame
@@ -16,8 +17,9 @@ namespace HerexamenGame
         public Vector2 Position { get; set; }
         public Rectangle CollisionRectangle { get; set; }
         public int Health { get; set; }
-
+        public Vector2 direction;
         private Rectangle _collisionRectangle;
+        
         
 
         private Texture2D heroTexture;
@@ -30,13 +32,14 @@ namespace HerexamenGame
         public IInputReader inputReader;
         private IGameCommand moveCommand;
         private Rectangle idleFrame;
+        private KeyboardState pastKey;
 
         public Hero(Texture2D texture, IInputReader reader, int width, Bullet bullet)
         {
             heroTexture = texture;
             Position = new Vector2(spawnX, spawnY);
             Health = 100;
-            
+            direction = new Vector2(0,0);
 
             animation = new Animation();
             animation.AddFrame(new AnimationFrame(new Rectangle(18, 483, 79, 96)));
@@ -54,7 +57,7 @@ namespace HerexamenGame
 
             inputReader = reader;
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 80, 97);
-            moveCommand = new MoveCommand();
+            moveCommand = new MoveCommand(new Vector2(5,0));
             idleFrame = new Rectangle(22, 123, 73, 101);
             screenWidth = width;
             Bullet = bullet;
@@ -62,14 +65,15 @@ namespace HerexamenGame
 
         public void Update(GameTime gametime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && pastKey.IsKeyUp(Keys.Space))
             {
                 Bullet.Shoot(this);                
             }
-
+            pastKey = Keyboard.GetState();
             Bullet.Update(this);
 
-            var direction = inputReader.ReadInput();
+            direction = inputReader.ReadInput();
+            Debug.WriteLine(direction);
             MoveHorizontal(direction);
             _collisionRectangle.X = (int)Position.X;
             CollisionRectangle = _collisionRectangle;

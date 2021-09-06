@@ -46,7 +46,7 @@ namespace HerexamenGame.World
             animation.AddFrame(new AnimationFrame(new Rectangle(594, 254, 53, 88)));
             animation.AddFrame(new AnimationFrame(new Rectangle(670, 254, 53, 88)));
 
-            moveCommand = new MoveCommand();
+            moveCommand = new MoveCommand(new Vector2(2,0));
             _collisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 54, 89);
         }
 

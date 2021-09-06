@@ -164,7 +164,7 @@ namespace HerexamenGame
                         if (collisionManager.CheckCollision(hero.CollisionRectangle, enemy.CollisionRectangle))
                         {
                             enemy.Position = new Vector2 ((int)hero.Position.X - hero.CollisionRectangle.Width/2, (int)hero.Position.Y);
-                            hero.Health -= 5;
+                            hero.Health -= 1;
                             collisionManager.hit = true;
                         }
                         if (collisionManager.hit)
@@ -179,8 +179,8 @@ namespace HerexamenGame
                     {
                         if (enemy.enemies.Count() > 0 && collisionManager.CheckCollision(bullet.CollisionRectangle, enemy.enemies.First().CollisionRectangle))
                         {
-                            enemy.enemies[0].Health = 0;
-                            bullet.bullets.Remove(bullet);
+                            enemy.enemies[0].Health -= 25;
+                            bullet.isVisible = false;
                             Debug.WriteLine("test");
                         }
                         if (collisionManager.CheckCollision(bullet.CollisionRectangle, hero.CollisionRectangle))
