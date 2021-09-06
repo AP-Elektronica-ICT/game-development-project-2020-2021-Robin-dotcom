@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HerexamenGame.Visuals
+namespace HerexamenGame.UI
 {
     public class Button
     {

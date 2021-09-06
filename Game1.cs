@@ -1,6 +1,7 @@
 ﻿using HerexamenGame.Collision;
+using HerexamenGame.GameStates;
 using HerexamenGame.Input;
-using HerexamenGame.Visuals;
+using HerexamenGame.UI;
 using HerexamenGame.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -59,6 +60,8 @@ namespace HerexamenGame
         HealthBar healthBar;
         Button buttonPlay;
         Button buttonRespawn;
+        MainMenu mainMenu;
+        Respawn respawnMenu;
 
         //Button buttonResume;
         //Button buttonQuit;
@@ -123,6 +126,8 @@ namespace HerexamenGame
             enemy = new Enemy(textureZombie1);
             spawn = new EnemySpawn(enemy);
             healthBar = new HealthBar(textureHealthBar);
+            mainMenu = new MainMenu(textureMainMenuBackground, buttonPlay, screenWidth, screenHeight);
+            respawnMenu = new Respawn(textureDeadBackground, buttonPlay, screenWidth, screenHeight, font, score);
 
        }
 
@@ -228,7 +233,7 @@ namespace HerexamenGame
                 case GameState.Respawn:
                     _spriteBatch.Begin();
                     _spriteBatch.Draw(textureDeadBackground, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
-                    _spriteBatch.DrawString(font, "You killed " + score + " zombies. Well Done!", new Vector2(300, 300), Color.Red);
+                    _spriteBatch.DrawString(font, "You killed " + score/4 + " zombies. Well Done!", new Vector2(300, 300), Color.Red);
                     buttonRespawn.Draw(_spriteBatch);
                     _spriteBatch.End();
                     break;
