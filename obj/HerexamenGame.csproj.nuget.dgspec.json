@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj": {}
+  },
+  "projects": {
+    "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj",
+        "projectName": "HerexamenGame",
+        "projectPath": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\HerexamenGame.csproj",
+        "packagesPath": "C:\\Users\\Robin Segers\\.nuget\\packages\\",
+        "outputPath": "D:\\AP\\Semester3\\GameDev\\github\\game-development-project-2020-2021-Robin-dotcom\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Robin Segers\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "MonoGame.Framework.WindowsDX": {
+              "target": "Package",
+              "version": "[3.8.0.1641, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
